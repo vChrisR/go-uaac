@@ -1,4 +1,29 @@
-hash: b95241dc3ef444874b2d71bbc9146356744b87e335030101cb7fefdae6653577
-updated: 2016-08-23T16:27:11.304587289-05:00
-imports: []
+hash: 7b574f205ffecaf7174183ef3d2c0df9f0fc946663220d5134a09e37ef9b976b
+updated: 2016-08-29T07:52:41.335507282-04:00
+imports:
+- name: github.com/dave-malone/oauth
+  version: d51827842cae18a80a4ec0db2395fa2e859bc1f0
+- name: github.com/golang/protobuf
+  version: 888eb0692c857ec880338addf316bd662d5e630e
+  subpackages:
+  - proto
+- name: golang.org/x/net
+  version: 6250b412798208e6c90b03b7c4f226de5aa299e2
+  subpackages:
+  - context
+- name: golang.org/x/oauth2
+  version: 4d549c893be7d4011bab739cc585d091a7188d27
+  subpackages:
+  - clientcredentials
+  - internal
+- name: google.golang.org/appengine
+  version: 4f7eeb5305a4ba1966344836ba4af9996b7b4e05
+  subpackages:
+  - urlfetch
+  - internal
+  - internal/urlfetch
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
 devImports: []
