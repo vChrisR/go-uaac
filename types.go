@@ -1,5 +1,19 @@
 package uaa
 
+import "fmt"
+
+type UserGuid string
+
+func getUserGuid(i interface{}) (*UserGuid, error) {
+	s, ok := i.(string)
+	if ok != true {
+		return nil, fmt.Errorf("%v is not a valid user guid", i)
+	}
+
+	guid := UserGuid(s)
+	return &guid, nil
+}
+
 type ServerInfo struct {
 	App            map[string]string
 	Links          map[string]string

@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/dave-malone/oauth"
 )
 
 func TestNewClient(t *testing.T) {
@@ -20,46 +22,9 @@ func TestNewClient(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	if _, err := connInfo.Connect(); err != nil {
-		t.Errorf("Failed to initialize client: %s", err.Error())
-	}
-}
-
-func TestGetAccessToken(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, `{
-      "access_token" : "4a53a3331b2445cfaca43c9af00439e8",
-      "token_type" : "bearer",
-      "expires_in" : 43199,
-      "scope" : "clients.read emails.write scim.userids password.write idps.write notifications.write oauth.login scim.write critical_notifications.write",
-      "jti" : "4a53a3331b2445cfaca43c9af00439e8"
-    }`)
-	}))
-	defer ts.Close()
-
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	uaac := &uaaClient{
-		connInfo: connInfo,
-	}
-
-	accessToken, err := uaac.getAccessToken()
-	if err != nil {
-		t.Errorf("Failed to get access token: %s", err.Error())
-	}
-
-	if len(accessToken.Token) == 0 {
-		t.Error("AccessToken.Token was blank")
+	if _, err := getUaac(ts.URL); err != nil {
+		t.Errorf("Failed to initialize uaa client; %v", err)
+		return
 	}
 }
 
@@ -90,14 +55,10 @@ func TestGetServerInfo(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	uaac := &uaaClient{
-		connInfo: connInfo,
+	uaac, err := getUaac(ts.URL)
+	if err != nil {
+		t.Errorf("Failed to get uaa client; %v", err)
+		return
 	}
 
 	serverInfo, err := uaac.GetServerInfo()
@@ -131,14 +92,10 @@ func TestGetListOauthClients(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	uaac := &uaaClient{
-		connInfo: connInfo,
+	uaac, err := getUaac(ts.URL)
+	if err != nil {
+		t.Errorf("Failed to get uaa client; %v", err)
+		return
 	}
 
 	clients, err := uaac.ListOauthClients()
@@ -165,14 +122,10 @@ func TestGetListIdentityZones(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	uaac := &uaaClient{
-		connInfo: connInfo,
+	uaac, err := getUaac(ts.URL)
+	if err != nil {
+		t.Errorf("Failed to get uaa client; %v", err)
+		return
 	}
 
 	zones, err := uaac.ListIdentityZones()
@@ -197,14 +150,10 @@ func TestGetListUsersWithUaa20Model(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	connInfo := &ConnectionInfo{
-		ServerURL:    ts.URL,
-		ClientID:     "fake-client",
-		ClientSecret: "big-secret",
-	}
-
-	uaac := &uaaClient{
-		connInfo: connInfo,
+	uaac, err := getUaac(ts.URL)
+	if err != nil {
+		t.Errorf("Failed to get uaa client; %v", err)
+		return
 	}
 
 	users, err := uaac.ListUsers()
@@ -215,4 +164,20 @@ func TestGetListUsersWithUaa20Model(t *testing.T) {
 	if len(users.Users) == 0 {
 		t.Error("[]Users was empty")
 	}
+}
+
+func getUaac(apiUrl string) (Client, error) {
+	clientConfig := &oauth.ClientConfig{
+		ApiAddress:   apiUrl,
+		ClientID:     "fake-client",
+		ClientSecret: "big-secret",
+	}
+
+	oauthClient, err := oauth.NewClient(clientConfig)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to initialize oauth client; %v", err)
+	}
+
+	uaac := &uaaClient{oauthClient}
+	return uaac, nil
 }
