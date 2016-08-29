@@ -1,10 +1,10 @@
 hash: 7b574f205ffecaf7174183ef3d2c0df9f0fc946663220d5134a09e37ef9b976b
-updated: 2016-08-29T07:52:41.335507282-04:00
+updated: 2016-08-29T15:51:29.343972631-05:00
 imports:
 - name: github.com/dave-malone/oauth
-  version: d51827842cae18a80a4ec0db2395fa2e859bc1f0
+  version: 962f63cb4b264e5fd2f539cc02e8e5ecc9601f1d
 - name: github.com/golang/protobuf
-  version: 888eb0692c857ec880338addf316bd662d5e630e
+  version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
   subpackages:
   - proto
 - name: golang.org/x/net
