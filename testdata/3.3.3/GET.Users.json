@@ -1,0 +1,99 @@
+{
+  "resources": [
+    {
+      "id": "cc932cbe-7c63-4d16-8244-9bc6b572948e",
+      "meta": {
+        "version": 0,
+        "created": "2016-08-29T10:39:06.304Z",
+        "lastModified": "2016-08-29T10:39:06.304Z"
+      },
+      "userName": "marissa",
+      "name": {
+        "familyName": "Bloggs",
+        "givenName": "Marissa"
+      },
+      "emails": [
+        {
+          "value": "marissa@test.org"
+        }
+      ],
+      "groups": [
+        {
+          "value": "7ff4ae89-4a42-4e42-96e3-2f29bb7d0972",
+          "display": "acme.dev",
+          "type": "DIRECT"
+        },
+        {
+          "value": "423f9308-70fe-40e6-856c-2accb82834b8",
+          "display": "password.write",
+          "type": "DIRECT"
+        },
+        {
+          "value": "5188570c-ed64-4255-99e1-42448f5ab26c",
+          "display": "oauth.approvals",
+          "type": "DIRECT"
+        },
+        {
+          "value": "f4e5d213-6f15-40fb-863b-44b703ffb415",
+          "display": "acme",
+          "type": "INDIRECT"
+        },
+        {
+          "value": "6cbdb394-8e2a-4cba-ad5d-7e4cb557cdcb",
+          "display": "cloud_controller.write",
+          "type": "DIRECT"
+        },
+        {
+          "value": "dfb291a7-01f8-4784-84ed-a9b32568f3bd",
+          "display": "openid",
+          "type": "DIRECT"
+        },
+        {
+          "value": "079f0a92-cbd3-45c3-a1f6-21fc990c33d1",
+          "display": "scim.me",
+          "type": "DIRECT"
+        },
+        {
+          "value": "3d33c92b-7b90-4e56-b136-d692763b0af1",
+          "display": "cloud_controller.read",
+          "type": "DIRECT"
+        },
+        {
+          "value": "db5238d1-5984-4b75-9afa-bcf28e1a9552",
+          "display": "scim.userids",
+          "type": "DIRECT"
+        },
+        {
+          "value": "4fd02e4f-71c5-4201-8890-650357c4c153",
+          "display": "uaa.user",
+          "type": "DIRECT"
+        },
+        {
+          "value": "c26c76e1-0b90-47c2-9d77-9e4989433104",
+          "display": "cloud_controller_service_permissions.read",
+          "type": "DIRECT"
+        },
+        {
+          "value": "b0a469e9-994e-4496-a614-b71b8715d035",
+          "display": "approvals.me",
+          "type": "DIRECT"
+        }
+      ],
+      "approvals": [
+
+      ],
+      "active": true,
+      "verified": true,
+      "origin": "uaa",
+      "schemas": [
+        "urn:scim:schemas:core:1.0"
+      ]
+    }
+  ],
+  "startIndex": 1,
+  "itemsPerPage": 100,
+  "totalResults": 1,
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ]
+}

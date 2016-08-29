@@ -1,0 +1,99 @@
+{
+  "resources": [
+    {
+      "id": "ac51dd87-1056-40db-a095-6d591f11dac8",
+      "meta": {
+        "version": 0,
+        "created": "2016-08-29T10:33:24.099Z",
+        "lastModified": "2016-08-29T10:33:24.099Z"
+      },
+      "userName": "marissa",
+      "name": {
+        "familyName": "Bloggs",
+        "givenName": "Marissa"
+      },
+      "emails": [
+        {
+          "value": "marissa@test.org"
+        }
+      ],
+      "groups": [
+        {
+          "value": "b91e9ec0-061e-4bfc-9335-2348ba4223f8",
+          "display": "openid",
+          "type": "DIRECT"
+        },
+        {
+          "value": "73d8e85c-e531-41fa-89d1-8b8c8e0cbcd8",
+          "display": "cloud_controller.write",
+          "type": "DIRECT"
+        },
+        {
+          "value": "cc3c6d82-040e-4185-916b-b5dfbd9ea9b1",
+          "display": "acme.dev",
+          "type": "DIRECT"
+        },
+        {
+          "value": "f9cfc67e-c5c2-4043-921c-88fff8e91866",
+          "display": "cloud_controller.read",
+          "type": "DIRECT"
+        },
+        {
+          "value": "0b04b461-8d81-43ba-9c5b-d8f092644e4e",
+          "display": "uaa.user",
+          "type": "DIRECT"
+        },
+        {
+          "value": "2667e963-99ee-4446-afdf-7813fcb028ec",
+          "display": "scim.userids",
+          "type": "DIRECT"
+        },
+        {
+          "value": "f723de91-2f62-43af-8fd5-9c2055e61d7f",
+          "display": "oauth.approvals",
+          "type": "DIRECT"
+        },
+        {
+          "value": "ecc77479-7730-415a-bb73-a714dbdf7fe4",
+          "display": "cloud_controller_service_permissions.read",
+          "type": "DIRECT"
+        },
+        {
+          "value": "40e04271-e1e4-4c40-b84e-371e4e82ace9",
+          "display": "acme",
+          "type": "INDIRECT"
+        },
+        {
+          "value": "d1217cd9-e9f4-43a3-a776-b2e147ab1b45",
+          "display": "scim.me",
+          "type": "DIRECT"
+        },
+        {
+          "value": "078876f1-6002-4253-b5e7-6c3975a32d5c",
+          "display": "password.write",
+          "type": "DIRECT"
+        },
+        {
+          "value": "0ab88858-c65c-4f37-b29c-e07aa8c54abe",
+          "display": "approvals.me",
+          "type": "DIRECT"
+        }
+      ],
+      "approvals": [
+
+      ],
+      "active": true,
+      "verified": true,
+      "origin": "uaa",
+      "schemas": [
+        "urn:scim:schemas:core:1.0"
+      ]
+    }
+  ],
+  "startIndex": 1,
+  "itemsPerPage": 100,
+  "totalResults": 1,
+  "schemas": [
+    "urn:scim:schemas:core:1.0"
+  ]
+}
