@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"reflect"
 
 	"github.com/dave-malone/oauth"
@@ -31,8 +30,6 @@ func NewClient(config *oauth.ClientConfig) (Client, error) {
 }
 
 func (u *uaaClient) executeRequest(r *oauth.Request) ([]byte, error) {
-	log.Printf("executing request %vn", r)
-
 	resp, err := u.oauthClient.DoRequest(r)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to execute request %v: %v\n", r, err)

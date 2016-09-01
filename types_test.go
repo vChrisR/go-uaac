@@ -3,7 +3,6 @@ package uaa
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"testing"
 )
 
@@ -211,9 +210,6 @@ func TestJSONUnmarshallUsersWithUaa20Model(t *testing.T) {
 
 	if len(user.GUID) == 0 {
 		t.Error("Failed to unmarshall resources[0].id field onto Users.Users[0].GUID")
-	}
-	if len(user.ExternalID) == 0 {
-		log.Println("Failed to unmarshall resources[0].externalID field onto Users.Users[0].ExternalID")
 	}
 	if len(user.Username) == 0 {
 		t.Error("Failed to unmarshall resources[0].username field onto Users.Users[0].Username")
