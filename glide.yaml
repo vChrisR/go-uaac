@@ -1,3 +1,8 @@
 package: github.com/pivotalservices/go-uaac
 import:
-- package: github.com/dave-malone/oauth
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: golang.org/x/oauth2
+  subpackages:
+  - clientcredentials

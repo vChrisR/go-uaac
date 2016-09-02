@@ -1,8 +1,6 @@
-hash: dce5437889bbe9da8621d0d34dfb386cb809159125129b0f69c3e22cc3635470
-updated: 2016-09-02T10:42:12.707685635-04:00
+hash: 056bae8d4a4fcb05c8cacd64932d62280a61d3ed047ec20f66efb34c9efb2b76
+updated: 2016-09-02T16:01:09.688776037-04:00
 imports:
-- name: github.com/dave-malone/oauth
-  version: 962f63cb4b264e5fd2f539cc02e8e5ecc9601f1d
 - name: github.com/golang/protobuf
   version: 1f49d83d9aa00e6ce4fc8258c71cc7786aec968a
   subpackages:
