@@ -160,8 +160,6 @@ func TestCreateUserCommand(t *testing.T) {
 		t.Errorf("Failed execute CreateUserCommand: %v", err)
 	}
 
-	fmt.Println("guid: ", user.GUID)
-
 	if len(user.GUID) == 0 {
 		t.Errorf("Empty UserGuid after running CreateUserCommand %v", user)
 	}

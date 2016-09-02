@@ -9,4 +9,4 @@ This project uses [Glide](https://github.com/Masterminds/glide)
 
 To setup your local workspace, first clone this project, and then run `glide install`
 
-To run the project test suite, run `go test .\... $(glide novendor)`
+To run the project test suite, run `go test $(glide novendor)`
