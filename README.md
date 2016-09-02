@@ -17,13 +17,15 @@ config := &uaa.ClientConfig{
 
 uaac, err := uaa.NewClient(clientConfig)
 if err != nil {
-  return nil, fmt.Errorf("Failed to initialize uaa client; %v", err)
+  fmt.Printf("Failed to initialize uaa client; %v", err)
+  return
 }
 
 var serverInfo ServerInfo
 command := NewGetServerInfoCommand(uaac, &serverInfo)
 if err := command.Execute(); err != nil {
-  t.Errorf("Failed to get ServerInfo: %v", err)
+  fmt.Printf("Failed to execute GetServerInfoCommand: %v\n", err)
+  return
 }
 
 fmt.Println("Your UAAC Server Version is ", serverInfo.Version())
