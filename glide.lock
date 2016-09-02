@@ -1,5 +1,5 @@
-hash: 7b574f205ffecaf7174183ef3d2c0df9f0fc946663220d5134a09e37ef9b976b
-updated: 2016-08-29T15:51:29.343972631-05:00
+hash: dce5437889bbe9da8621d0d34dfb386cb809159125129b0f69c3e22cc3635470
+updated: 2016-09-02T10:42:12.707685635-04:00
 imports:
 - name: github.com/dave-malone/oauth
   version: 962f63cb4b264e5fd2f539cc02e8e5ecc9601f1d
@@ -8,11 +8,11 @@ imports:
   subpackages:
   - proto
 - name: golang.org/x/net
-  version: 6250b412798208e6c90b03b7c4f226de5aa299e2
+  version: 1358eff22f0dd0c54fc521042cc607f6ff4b531a
   subpackages:
   - context
 - name: golang.org/x/oauth2
-  version: 4d549c893be7d4011bab739cc585d091a7188d27
+  version: 3c3a985cb79f52a3190fbc056984415ca6763d01
   subpackages:
   - clientcredentials
   - internal
