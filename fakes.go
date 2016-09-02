@@ -1,53 +1,28 @@
 package uaa
 
-import (
-	"io"
-	"net/http"
-)
+import "github.com/dave-malone/oauth"
 
 type FakeUaac struct {
-	si           ServerInfo
-	oauthClients OauthClients
-	zones        []IdentityZone
-	users        Users
+	req          *oauth.Request
+	responseBody []byte
 	err          error
 }
 
-func (c *FakeUaac) LoggedIn() bool {
-	return true
+func (c *FakeUaac) NewRequestReturns(r *oauth.Request) {
+	c.req = r
 }
 
-func (c *FakeUaac) GetServerInfoReturns(si ServerInfo, err error) {
-	c.si = si
+func (c *FakeUaac) NewExecuteRequest(body []byte, err error) {
+	c.responseBody = body
 	c.err = err
 }
 
-func (c *FakeUaac) ListOauthClientsReturns(o OauthClients, err error) {
-	c.oauthClients = o
-	c.err = err
+func (c *FakeUaac) NewRequest(method, path string) *oauth.Request {
+	return c.req
 }
-
-func (c *FakeUaac) ListIdentityZonesReturns(z []IdentityZone, err error) {
-	c.zones = z
-	c.err = err
+func (c *FakeUaac) ExecuteRequest(r *oauth.Request) ([]byte, error) {
+	return c.responseBody, c.err
 }
-
-func (c *FakeUaac) getAccessToken() (AccessToken, error) {
-	panic("fakeUaac.getAccessToken should not be called!!")
-}
-func (c *FakeUaac) newHTTPRequest(method, uriStr string, body io.Reader) (*http.Request, error) {
-	panic("fakeUaac.newHTTPRequest should not be called!!")
-}
-
-func (c *FakeUaac) GetServerInfo() (ServerInfo, error) {
-	return c.si, c.err
-}
-func (c *FakeUaac) ListOauthClients() (OauthClients, error) {
-	return c.oauthClients, c.err
-}
-func (c *FakeUaac) ListIdentityZones() ([]IdentityZone, error) {
-	return c.zones, c.err
-}
-func (c *FakeUaac) ListUsers() (Users, error) {
-	return c.users, c.err
+func (c *FakeUaac) ExecuteAndUnmarshall(r *oauth.Request, target interface{}) {
+	panic("fakeUaac.ExecuteAndUnmarshall not yet implemented")
 }

@@ -10,11 +10,15 @@ import (
 )
 
 type Client interface {
-	GetServerInfo() (ServerInfo, error)
-	ListOauthClients() (OauthClients, error)
-	ListIdentityZones() ([]IdentityZone, error)
-	ListUsers() (Users, error)
-	CreateUser(user *User) (*UserGuid, error)
+	NewRequest(method, path string) *oauth.Request
+	ExecuteRequest(r *oauth.Request) ([]byte, error)
+	ExecuteAndUnmarshall(r *oauth.Request, target interface{}) error
+
+	// GetServerInfo() (ServerInfo, error)
+	// ListOauthClients() (OauthClients, error)
+	// ListIdentityZones() ([]IdentityZone, error)
+	// ListUsers() (Users, error)
+	// CreateUser(user *User) (*UserGuid, error)
 }
 
 type uaaClient struct {
@@ -29,7 +33,11 @@ func NewClient(config *oauth.ClientConfig) (Client, error) {
 	return &uaaClient{client}, nil
 }
 
-func (u *uaaClient) executeRequest(r *oauth.Request) ([]byte, error) {
+func (u *uaaClient) NewRequest(method, path string) *oauth.Request {
+	return u.oauthClient.NewRequest(method, path)
+}
+
+func (u *uaaClient) ExecuteRequest(r *oauth.Request) ([]byte, error) {
 	resp, err := u.oauthClient.DoRequest(r)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to execute request %v: %v\n", r, err)
@@ -44,8 +52,8 @@ func (u *uaaClient) executeRequest(r *oauth.Request) ([]byte, error) {
 	return body, nil
 }
 
-func (u *uaaClient) executeAndUnmarshall(r *oauth.Request, target interface{}) error {
-	body, err := u.executeRequest(r)
+func (u *uaaClient) ExecuteAndUnmarshall(r *oauth.Request, target interface{}) error {
+	body, err := u.ExecuteRequest(r)
 	if err != nil {
 		return fmt.Errorf("Failed to execute request %v: %v", r, err)
 	}
@@ -58,6 +66,7 @@ func (u *uaaClient) executeAndUnmarshall(r *oauth.Request, target interface{}) e
 	return nil
 }
 
+/*
 func (c *uaaClient) GetServerInfo() (ServerInfo, error) {
 	var info ServerInfo
 	req := c.oauthClient.NewRequest("GET", "/info")
@@ -133,3 +142,4 @@ func (u *uaaClient) CreateUser(user *User) (*UserGuid, error) {
 
 	return getUserGuid(createUserResponse["id"])
 }
+*/
