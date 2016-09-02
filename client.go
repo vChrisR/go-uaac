@@ -79,27 +79,6 @@ func (c *uaaClient) GetServerInfo() (ServerInfo, error) {
 	return info, nil
 }
 
-func (c *uaaClient) ListOauthClients() (OauthClients, error) {
-	var clients OauthClients
-	req := c.oauthClient.NewRequest("GET", "/oauth/clients")
-
-	if err := c.executeAndUnmarshall(req, &clients); err != nil {
-		return clients, err
-	}
-
-	return clients, nil
-}
-
-func (c *uaaClient) ListIdentityZones() ([]IdentityZone, error) {
-	var zones []IdentityZone
-	req := c.oauthClient.NewRequest("GET", "/identity-zones")
-	if err := c.executeAndUnmarshall(req, &zones); err != nil {
-		return zones, err
-	}
-
-	return zones, nil
-}
-
 func (c *uaaClient) ListUsers() (Users, error) {
 	var users Users
 

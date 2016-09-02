@@ -71,36 +71,6 @@ func TestGetServerInfo(t *testing.T) {
 	}
 }
 
-func TestGetListIdentityZones(t *testing.T) {
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, `[{
-        "id": "dummy-id",
-        "subdomain": "dummy-subdomain",
-        "name": "dummy-name",
-        "version": 1,
-        "description": "Dummy Description",
-        "created": 946710000000,
-        "last_modified": 946710000000
-    }]`)
-	}))
-	defer ts.Close()
-
-	uaac, err := getUaac(ts.URL)
-	if err != nil {
-		t.Errorf("Failed to get uaa client; %v", err)
-		return
-	}
-
-	zones, err := uaac.ListIdentityZones()
-	if err != nil {
-		t.Errorf("Failed to get Zones: %v", err)
-	}
-
-	if len(zones) == 0 {
-		t.Error("[]Zone was empty")
-	}
-}
-
 func TestGetListUsersWithUaa20Model(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		data, err := ioutil.ReadFile("./testdata/2.0.0/GET.Users.json")
