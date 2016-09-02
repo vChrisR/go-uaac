@@ -1,14 +1,12 @@
 package uaa
 
-import "github.com/dave-malone/oauth"
-
 type FakeUaac struct {
-	req          *oauth.Request
+	req          *Request
 	responseBody []byte
 	err          error
 }
 
-func (c *FakeUaac) NewRequestReturns(r *oauth.Request) {
+func (c *FakeUaac) NewRequestReturns(r *Request) {
 	c.req = r
 }
 
@@ -17,12 +15,12 @@ func (c *FakeUaac) NewExecuteRequest(body []byte, err error) {
 	c.err = err
 }
 
-func (c *FakeUaac) NewRequest(method, path string) *oauth.Request {
+func (c *FakeUaac) NewRequest(method, path string) *Request {
 	return c.req
 }
-func (c *FakeUaac) ExecuteRequest(r *oauth.Request) ([]byte, error) {
+func (c *FakeUaac) ExecuteRequest(r *Request) ([]byte, error) {
 	return c.responseBody, c.err
 }
-func (c *FakeUaac) ExecuteAndUnmarshall(r *oauth.Request, target interface{}) {
+func (c *FakeUaac) ExecuteAndUnmarshall(r *Request, target interface{}) {
 	panic("fakeUaac.ExecuteAndUnmarshall not yet implemented")
 }

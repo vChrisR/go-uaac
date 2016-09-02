@@ -23,7 +23,7 @@ type Users struct {
 }
 
 type User struct {
-	GUID       string      `json:"id,omitempty"`
+	GUID       UserGuid    `json:"id,omitempty"`
 	ExternalID string      `json:"externalId"`
 	Username   string      `json:"userName"`
 	Emails     []UserEmail `json:"emails"`

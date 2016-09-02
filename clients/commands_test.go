@@ -6,12 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/dave-malone/oauth"
 	uaa "github.com/pivotalservices/go-uaac"
 )
 
 func getUaac(apiUrl string) (uaa.Client, error) {
-	clientConfig := &oauth.ClientConfig{
+	clientConfig := &uaa.ClientConfig{
 		ApiAddress:   apiUrl,
 		ClientID:     "fake-client",
 		ClientSecret: "big-secret",

@@ -7,10 +7,10 @@ import (
 )
 
 func TestJSONUnmarshallUsersWithUaa20Model(t *testing.T) {
-	responseBody, err := ioutil.ReadFile("./testdata/2.0.0/GET.Users.json")
+	responseBody, err := ioutil.ReadFile("../testdata/2.0.0/GET.Users.json")
 
 	if err != nil {
-		panic("Failed to read ./testdata/2.0.0/GET.Users.json: " + err.Error())
+		panic("Failed to read ../testdata/2.0.0/GET.Users.json: " + err.Error())
 	}
 
 	var users Users
