@@ -7,14 +7,60 @@ import (
 
 func TestJSONUnmarshallIdentityZone(t *testing.T) {
 	responseBody := []byte(`{
-        "id": "dummy-id",
-        "subdomain": "dummy-subdomain",
-        "name": "dummy-name",
-        "version": 1,
-        "description": "Dummy Description",
-        "created": 946710000000,
-        "last_modified": 946710000000
-    }`)
+	  "id" : "twiglet-get",
+	  "subdomain" : "twiglet-get",
+	  "config" : {
+	    "tokenPolicy" : {
+	      "accessTokenValidity" : -1,
+	      "refreshTokenValidity" : -1,
+	      "jwtRevocable" : false,
+	      "activeKeyId" : null,
+	      "keys" : { }
+	    },
+	    "samlConfig" : {
+	      "assertionSigned" : true,
+	      "requestSigned" : true,
+	      "wantAssertionSigned" : false,
+	      "wantAuthnRequestSigned" : false,
+	      "assertionTimeToLiveSeconds" : 600,
+	      "certificate" : null,
+	      "privateKey" : null,
+	      "privateKeyPassword" : null
+	    },
+	    "links" : {
+	      "logout" : {
+	        "redirectUrl" : "/login",
+	        "redirectParameterName" : "redirect",
+	        "disableRedirectParameter" : true,
+	        "whitelist" : null
+	      },
+	      "selfService" : {
+	        "selfServiceLinksEnabled" : true,
+	        "signup" : "/create_account",
+	        "passwd" : "/forgot_password"
+	      }
+	    },
+	    "prompts" : [ {
+	      "name" : "username",
+	      "type" : "text",
+	      "text" : "Email"
+	    }, {
+	      "name" : "password",
+	      "type" : "password",
+	      "text" : "Password"
+	    }, {
+	      "name" : "passcode",
+	      "type" : "password",
+	      "text" : "One Time Code (Get on at /passcode)"
+	    } ],
+	    "idpDiscoveryEnabled" : false
+	  },
+	  "name" : "The Twiglet Zone",
+	  "version" : 1,
+		"description": "The Twiglet Zone",
+	  "created" : 1468364452298,
+	  "last_modified" : 1468364452298
+	}`)
 
 	var zone IdentityZone
 
