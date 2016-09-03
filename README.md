@@ -21,8 +21,8 @@ if err != nil {
   return
 }
 
-var serverInfo ServerInfo
-command := NewGetServerInfoCommand(uaac, &serverInfo)
+var serverInfo serverinfo.ServerInfo
+command := serverinfo.NewGetServerInfoCommand(uaac, &serverInfo)
 if err := command.Execute(); err != nil {
   fmt.Printf("Failed to execute GetServerInfoCommand: %v\n", err)
   return
