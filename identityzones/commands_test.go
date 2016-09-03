@@ -131,3 +131,23 @@ func TestGetIdentityZoneByIDCommand(t *testing.T) {
 		t.Error("IdentityZone not found")
 	}
 }
+
+func TestDeleteIdentityZoneCommand(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, `{}`)
+	}))
+	defer ts.Close()
+
+	uaac, err := getUaac(ts.URL)
+	if err != nil {
+		t.Errorf("Failed to get uaa client; %v", err)
+		return
+	}
+
+	zone := &IdentityZone{ID: "abc123"}
+	command := NewDeleteIdentityZoneCommand(uaac, zone)
+
+	if err := command.Execute(); err != nil {
+		t.Errorf("Failed to delete IdentityZone: %v", err)
+	}
+}

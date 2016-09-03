@@ -1,9 +1,12 @@
 package identityzones
 
-import uaa "github.com/pivotalservices/go-uaac"
+import (
+	"fmt"
+
+	uaa "github.com/pivotalservices/go-uaac"
+)
 
 type listIdentityZonesCommand struct {
-	//TODO - figure out how to embed this type
 	uaac  uaa.Client
 	zones *[]*IdentityZone
 }
@@ -12,6 +15,11 @@ type getIdentityZoneByIDCommand struct {
 	uaac   uaa.Client
 	zoneID string
 	zone   *IdentityZone
+}
+
+type deleteIdentityZoneCommand struct {
+	uaac uaa.Client
+	zone *IdentityZone
 }
 
 func NewListIdentityZonesCommand(uaac uaa.Client, zones *[]*IdentityZone) uaa.Command {
@@ -29,6 +37,13 @@ func NewGetIdentityZoneByIDCommand(uaac uaa.Client, zoneID string, zone *Identit
 	}
 }
 
+func NewDeleteIdentityZoneCommand(uaac uaa.Client, zone *IdentityZone) uaa.Command {
+	return &deleteIdentityZoneCommand{
+		uaac: uaac,
+		zone: zone,
+	}
+}
+
 func (c *listIdentityZonesCommand) Execute() error {
 	req := c.uaac.NewRequest("GET", "/identity-zones")
 	if err := c.uaac.ExecuteAndUnmarshall(req, &c.zones); err != nil {
@@ -42,6 +57,16 @@ func (c *getIdentityZoneByIDCommand) Execute() error {
 	req := c.uaac.NewRequest("GET", "/identity-zones/"+c.zoneID)
 	if err := c.uaac.ExecuteAndUnmarshall(req, &c.zone); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (c *deleteIdentityZoneCommand) Execute() error {
+	req := c.uaac.NewRequest("DELETE", "/identity-zones/"+c.zone.ID)
+	resp, err := c.uaac.DoRequest(req)
+	if err != nil {
+		return fmt.Errorf("Failed to Delete identity zone with id %s. HTTP Response Code: %d; error: %v", c.zone.ID, resp.StatusCode, err)
 	}
 
 	return nil
