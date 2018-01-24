@@ -72,6 +72,10 @@ func (c *createUserCommand) Execute() error {
 	} else {
 		id, err = getUserGuid(createUserResponse["id"])
 	}
+	
+	if err != nil {
+	   return fmt.Errorf("Failed to find user id in createuser response: %v", err)
+	}
 
 	c.user.GUID = *id
 
